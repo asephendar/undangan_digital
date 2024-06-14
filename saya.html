@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate APP_KEY</title>
+</head>
+<body>
+    <button id="generateKeyButton">Generate APP_KEY</button>
+    <p id="appKeyDisplay"></p>
+
+    <script>
+        // Fungsi untuk menghasilkan kunci APP_KEY
+        function generateAppKey() {
+            const length = 32; // Panjang kunci dalam byte (untuk pengkodean base64, ini akan menghasilkan 44 karakter)
+            const array = new Uint8Array(length);
+            window.crypto.getRandomValues(array);
+            const randomBytes = Array.from(array)
+                .map(byte => String.fromCharCode(byte))
+                .join('');
+            const base64Key = btoa(randomBytes);
+            return `base64:${base64Key}`;
+        }
+
+        // Fungsi untuk menampilkan kunci yang dihasilkan ke dalam halaman HTML
+        function displayAppKey() {
+            const appKey = generateAppKey();
+            const appKeyDisplay = document.getElementById('appKeyDisplay');
+            appKeyDisplay.textContent = appKey;
+        }
+
+        // Menambahkan event listener ke tombol untuk menghasilkan kunci saat tombol diklik
+        const generateKeyButton = document.getElementById('generateKeyButton');
+        generateKeyButton.addEventListener('click', displayAppKey);
+    </script>
+</body>
+</html>

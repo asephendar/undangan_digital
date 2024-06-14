@@ -1,0 +1,7 @@
+{
+    "name": "vendor/package-name",
+    "description": "A brief description of your project",
+    "require": {
+        "php": ">=7.4.0"
+    }
+}
